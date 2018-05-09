@@ -97,6 +97,8 @@ void put_tree_on_file(huffman_tree* ht,FILE* file_dtn);
  */
 huffman_tree* build_huffman_tree(huffman_tree *ht,FILE *file);
 
+#endif
+
 
 
 
