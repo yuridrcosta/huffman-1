@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../headers/huffman_tree.h"
 
 /*
  * Receives an unsigned char (byte), an interger to set in the byte and an interger with the displacement as parameter
