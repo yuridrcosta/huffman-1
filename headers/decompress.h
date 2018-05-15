@@ -1,10 +1,6 @@
 #ifndef DECOMPRESS_H
 #define DECOMPRESS_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "../headers/huffman_tree.h"
 
 /*
  * Receives an unsigned char (byte) and an interger as parameter

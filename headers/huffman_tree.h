@@ -1,19 +1,33 @@
 #ifndef HUFFMAN_TREE_H
 #define HUFFMAN_TREE_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#define MAX_SIZE 256
 
 typedef struct huffman_tree huffman_tree;
 typedef struct priority_queue queue;
+typedef struct hash_table hash_table;
+typedef struct node node;
 
-/*
- * Receives a pointer to a Huffman Tree as parameter
- * Returns an integer, 1 if it's empty, 0 if it's not empty
- */
-int is_empty_tree(huffman_tree* ht);
-
+struct huffman_tree
+{
+	int priority;
+	unsigned char item;
+	huffman_tree* left;
+	huffman_tree* right;
+	huffman_tree* next;
+};
+struct priority_queue
+{
+	huffman_tree* head;
+};
+struct node
+{
+	void* key;
+	void* value;	
+};
+struct hash_table
+{
+	node* table[MAX_SIZE];
+};
 /*
  * Receives a pointer to a Queue as parameter
  * Returns an interger, 1 if it's empty, 0 if it's not empty
@@ -21,9 +35,9 @@ int is_empty_tree(huffman_tree* ht);
 int is_empty_queue(queue* pq);
 
 /*
- *  Receives a Byte (type unsigned char) and the frequency (type interger) as parameter
- *  Alocates a Huffman Tree leaf structure in memory and gets a pointer to it. Set the byte which this structure represents and it's frequency
- *  Returns an pointer to the created Huffman Tree leaf
+ * Receives a Byte (type unsigned char) and the frequency (type interger) as parameter
+ * Alocates a Huffman Tree leaf structure in memory and gets a pointer to it. Set the byte which this structure represents and it's frequency
+ * Returns an pointer to the created Huffman Tree leaf
  */ 
 void* create_node_of_huffman_tree(unsigned char i, int p,huffman_tree* left,huffman_tree* right );
 
@@ -74,33 +88,35 @@ void* create_huffman_tree(queue* pq);
  * Returns an interger, 1 if it's a leaf, 0 if it's not
  */
 int isleaf(huffman_tree* ht);
-
-/*
- * Receives a pointer to a Huffman Tree as parameter
- * Gets the size of a Huffman Tree
- * Returns an interger (short) with the size of the tree
- */
-short int tree_size(huffman_tree* ht);
-
-short int maximum_bits_number(huffman_tree* ht);
-
-/*
- * Receives a pointer to a Huffman Tree and a pointer to the destination file as parameter
- * Prints the tree on the file
- */
-void put_tree_on_file(huffman_tree* ht,FILE* file_dtn);
-
 /*
  * Receives a pointer to a Huffman Tree and a pointer to the source file as parameter
  * Builds a Huffman Tree from a pre order printed tree (based in Huffman Tree rules)
- * Return a pointer to a Huffman Tree
+ * Returns a pointer to a Huffman Tree
  */
-huffman_tree* build_huffman_tree(huffman_tree *ht,FILE *file);
+void* build_huffman_tree(huffman_tree *ht,FILE *file);
+/*
+ * Receives one pointer to huffman tree, an hash table,pointer to string and how depth the tree is
+ * Put on string '0' if follow the left tree pointer or "1" if follow the right tree pointer in their respective depths
+ * If it's a leaf, copy this string with its encoding and put it in the hash table
+ */
+void mapping(huffman_tree *tree, hash_table *ht, unsigned char *code, int depth);
+/*
+ * Receives the huffman tree
+ * Calls mapping to get your hash table 
+ */
+hash_table* tree_to_table(huffman_tree *tree);
+/*
+ * Receives the huffman tree and an pointer to short int "id"
+ * Creates an string with tree in pre order
+ * This "id" representative the current index of this string and the string size
+ */
+void traversal_pre_order(huffman_tree *tree, short int *id);
+/*
+ * Receives the huffman tree and an pointer to short int "id"
+ * Allocate space for a string with the maximum possible tree size
+ * Calls traversal_pre_order to fill string with pre order tree
+ * Returns an pointer to string
+ */
+unsigned char* traversal_tree(huffman_tree *tree, short int *id);
 
 #endif
-
-
-
-
-
-
