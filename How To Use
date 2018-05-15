@@ -1,0 +1,16 @@
+Compile:
+	gcc main.c src/compress.c src/decompress.c src/huffman_tree.c src/hash_table.c -o huffman
+
+
+Step1) Type C for compress, D for decompress
+Step2) Type the name of the source file
+       PS: It has to be in the same folder
+Step3) Type the name of the destination file
+       PS: It has to be in the same folder
+
+
+Passo1) Digite C para comprimir, D para descomprimir
+Passo2) Digite o nome do arquivo de origem
+	OBS.: O arquivo deve estar na mesma pasta
+Passo3) Digite o nome do arquivo de destino
+	OBS.: O arquivo deve estar na mesma pasta
