@@ -338,7 +338,7 @@ void put_tree_on_file_test()
 void tree_size_test()
 {
 	//Building a tree to test
-	FILE *file1 = fopen("maximum_bits_number_test.txt","rb");
+	FILE *file1 = fopen("tree_size_test.txt","rb");
 	huffman_tree *ht = (huffman_tree*) malloc(sizeof(huffman_tree));
 	ht = build_huffman_tree(ht,file1);
 	//Test begin
