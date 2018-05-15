@@ -335,16 +335,6 @@ void put_tree_on_file_test()
 	}
 }
 
-void maximum_bits_number_test()
-{
-	//Building a tree to test	
-	FILE *file1 = fopen("maximum_bits_number_test.txt","rb");
-	huffman_tree *ht = (huffman_tree*) malloc(sizeof(huffman_tree));
-	ht = build_huffman_tree(ht,file1);
-	//Test begin
-	CU_ASSERT_EQUAL(maximum_bits_number(ht),4);
-}
-
 void tree_size_test()
 {
 	//Building a tree to test
@@ -399,10 +389,6 @@ int main() {
 	  return CU_get_error();
 	}
 	if (NULL == CU_add_test(pSuite, "build_huffman_tree_test", build_huffman_tree_test)) {
-	  CU_cleanup_registry();
-	  return CU_get_error();
-	}
-	if (NULL == CU_add_test(pSuite, "maximum_bits_number_test", maximum_bits_number_test)) {
 	  CU_cleanup_registry();
 	  return CU_get_error();
 	}
